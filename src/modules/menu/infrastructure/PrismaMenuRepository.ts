@@ -63,7 +63,10 @@ export class PrismaMenuRepository implements IMenuRepository {
     return this.toEntity(record);
   }
 
-  async update(id: string, data: Partial<Omit<Menu, "id" | "created_at" | "updated_at">>): Promise<Menu | null> {
+  async update(
+    id: string,
+    data: Partial<Omit<Menu, "id" | "created_at" | "updated_at">>
+  ): Promise<Menu | null> {
     const record = await prisma.menu.update({
       where: { id },
       data,

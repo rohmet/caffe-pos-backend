@@ -15,7 +15,11 @@ export class AuthController {
       const result = await loginUseCase.execute(email, password);
       res.status(200).json(result);
     } catch (error: any) {
-      if (error.message.includes("Invalid login credentials") || error.message.includes("does not exist") || error.message.includes("invalid")) {
+      if (
+        error.message.includes("Invalid login credentials") ||
+        error.message.includes("does not exist") ||
+        error.message.includes("invalid")
+      ) {
         res.status(401).json({ code: "UNAUTHORIZED", message: error.message });
       } else {
         next(error);
