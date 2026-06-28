@@ -7,6 +7,7 @@ import {
   CreateMenuUseCase,
   UpdateMenuUseCase,
   DeleteMenuUseCase,
+  MenuPublicApi,
 } from "../application/MenuUseCases.js";
 
 @registry([
@@ -16,5 +17,6 @@ import {
   { token: TOKENS.CreateMenuUseCase, useClass: CreateMenuUseCase },
   { token: TOKENS.UpdateMenuUseCase, useClass: UpdateMenuUseCase },
   { token: TOKENS.DeleteMenuUseCase, useClass: DeleteMenuUseCase },
+  { token: TOKENS.MenuPublicApi, useClass: MenuPublicApi },
 ])
 export class MenuRegistry {}

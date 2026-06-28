@@ -6,8 +6,10 @@ import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import "./modules/auth/infrastructure/Auth.registry.js";
 import "./modules/menu/infrastructure/Menu.registry.js";
+import "./modules/transaksi/infrastructure/Transaksi.registry.js";
 import { AuthController } from "./modules/auth/infrastructure/http/AuthController.js";
 import menuRoutes from "./modules/menu/infrastructure/http/MenuRoutes.js";
+import transaksiRoutes from "./modules/transaksi/infrastructure/http/TransaksiRoutes.js";
 import { supabaseAuthMiddleware } from "./core/security/supabaseAuthMiddleware.js";
 
 const app = express();
@@ -35,6 +37,9 @@ app.post("/api/auth/logout", AuthController.logout);
 
 // Menu Routes
 app.use("/api/menu", menuRoutes);
+
+// Transaksi Routes
+app.use("/api/transaksi", transaksiRoutes);
 
 // Protected Test Route (ponytail: verification check helper)
 app.get("/api/protected-test", supabaseAuthMiddleware, (req: Request, res: Response) => {

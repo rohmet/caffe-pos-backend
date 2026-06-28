@@ -103,3 +103,19 @@ export class DeleteMenuUseCase implements IDeleteMenuUseCase {
     return this.menuRepository.delete(id);
   }
 }
+
+export interface IMenuPublicApi {
+  getMenuById(id: string): Promise<Menu | null>;
+}
+
+@injectable()
+export class MenuPublicApi implements IMenuPublicApi {
+  constructor(
+    @inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository
+  ) {}
+
+  async getMenuById(id: string): Promise<Menu | null> {
+    return this.menuRepository.findById(id);
+  }
+}
+
