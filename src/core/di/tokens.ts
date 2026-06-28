@@ -8,4 +8,9 @@ export const TOKENS = {
   CreateMenuUseCase: Symbol.for("CreateMenuUseCase"),
   UpdateMenuUseCase: Symbol.for("UpdateMenuUseCase"),
   DeleteMenuUseCase: Symbol.for("DeleteMenuUseCase"),
+  MenuPublicApi: Symbol.for("MenuPublicApi"),
+  TransaksiRepository: Symbol.for("TransaksiRepository"),
+  CreateTransaksiUseCase: Symbol.for("CreateTransaksiUseCase"),
+  GetSemuaTransaksiUseCase: Symbol.for("GetSemuaTransaksiUseCase"),
+  GetDetailTransaksiUseCase: Symbol.for("GetDetailTransaksiUseCase"),
 };
