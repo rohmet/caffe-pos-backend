@@ -1,13 +1,55 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider  = "postgresql"
+}
+
+model Menu {
+  id             String          @id @default(uuid())
+  nama           String          @db.VarChar(255)
+  kategori       String          @db.VarChar(50)
+  harga_dasar    Int
+  surcharge_m    Int             @default(0)
+  surcharge_l    Int             @default(0)
+  deskripsi      String?         @db.Text
+  url_foto       String?         @db.Text
+  tersedia       Boolean         @default(true)
+  created_at     DateTime        @default(now()) @db.Timestamptz
+  updated_at     DateTime        @updatedAt @db.Timestamptz
+  transaksi_items TransaksiItem[]
+
+  @@map("menus")
+}
+
+model Transaksi {
+  id          String          @id @default(uuid())
+  no_invoice  String          @unique @db.VarChar(100)
+  total       Int
+  bayar       Int
+  kembalian   Int
+  cashier_id  String?         
+  created_at  DateTime        @default(now()) @db.Timestamptz
+  items       TransaksiItem[]
+
+  @@map("transaksi")
+}
+
+model TransaksiItem {
+  id           String     @id @default(uuid())
+  transaksi_id String     
+  menu_id      String?    
+  nama_menu    String     @db.VarChar(255)
+  harga_satuan Int
+  ukuran       String     @db.VarChar(10)
+  jumlah       Int
+  transaksi    Transaksi  @relation(fields: [transaksi_id], references: [id], onDelete: Cascade)
+  menu         Menu?      @relation(fields: [menu_id], references: [id], onDelete: SetNull)
+
+  @@map("transaksi_item")
 }

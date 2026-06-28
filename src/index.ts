@@ -1,14 +1,15 @@
 import "reflect-metadata";
+import "dotenv/config";
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
-import dotenv from "dotenv";
-
-dotenv.config();
+import "./modules/auth/infrastructure/Auth.registry.js";
+import { AuthController } from "./modules/auth/infrastructure/http/AuthController.js";
+import { supabaseAuthMiddleware } from "./core/security/supabaseAuthMiddleware.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8001;
 
 app.use(helmet());
 app.use(cors());
@@ -24,6 +25,15 @@ app.use(limiter);
 
 app.get("/health", (req: Request, res: Response) => {
   res.status(200).json({ status: "OK", timestamp: new Date().toISOString() });
+});
+
+// Auth Routes
+app.post("/api/auth/login", AuthController.login);
+app.post("/api/auth/logout", AuthController.logout);
+
+// Protected Test Route (ponytail: verification check helper)
+app.get("/api/protected-test", supabaseAuthMiddleware, (req: Request, res: Response) => {
+  res.status(200).json({ message: "Authenticated successfully", user: req.user });
 });
 
 app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
