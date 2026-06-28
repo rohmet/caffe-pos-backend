@@ -105,7 +105,7 @@ describe("Menu Use Cases", () => {
     );
 
     const useCase = container.resolve(GetMenusUseCase);
-    
+
     const all = await useCase.execute();
     expect(all.length).toBe(2);
 

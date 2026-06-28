@@ -75,8 +75,32 @@ describe("Transaksi Use Cases", () => {
 
   it("should create transaction successfully with correct calculations and surcharges", async () => {
     mockMenuApi.menus.push(
-      new Menu("menu-1", "Kopi", "minuman", 10000, 2000, 4000, null, null, true, new Date(), new Date()),
-      new Menu("menu-2", "Roti", "makanan ringan", 15000, 0, 0, null, null, true, new Date(), new Date())
+      new Menu(
+        "menu-1",
+        "Kopi",
+        "minuman",
+        10000,
+        2000,
+        4000,
+        null,
+        null,
+        true,
+        new Date(),
+        new Date()
+      ),
+      new Menu(
+        "menu-2",
+        "Roti",
+        "makanan ringan",
+        15000,
+        0,
+        0,
+        null,
+        null,
+        true,
+        new Date(),
+        new Date()
+      )
     );
 
     const useCase = container.resolve(CreateTransaksiUseCase);

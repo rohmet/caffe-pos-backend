@@ -26,9 +26,7 @@ export interface IDeleteMenuUseCase {
 
 @injectable()
 export class GetMenusUseCase implements IGetMenusUseCase {
-  constructor(
-    @inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository
-  ) {}
+  constructor(@inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository) {}
 
   async execute(search?: string, kategori?: string): Promise<Menu[]> {
     return this.menuRepository.findAll(search, kategori);
@@ -37,9 +35,7 @@ export class GetMenusUseCase implements IGetMenusUseCase {
 
 @injectable()
 export class GetMenuByIdUseCase implements IGetMenuByIdUseCase {
-  constructor(
-    @inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository
-  ) {}
+  constructor(@inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository) {}
 
   async execute(id: string): Promise<Menu> {
     const menu = await this.menuRepository.findById(id);
@@ -52,9 +48,7 @@ export class GetMenuByIdUseCase implements IGetMenuByIdUseCase {
 
 @injectable()
 export class CreateMenuUseCase implements ICreateMenuUseCase {
-  constructor(
-    @inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository
-  ) {}
+  constructor(@inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository) {}
 
   async execute(dto: CreateMenuDTO): Promise<Menu> {
     return this.menuRepository.save({
@@ -72,9 +66,7 @@ export class CreateMenuUseCase implements ICreateMenuUseCase {
 
 @injectable()
 export class UpdateMenuUseCase implements IUpdateMenuUseCase {
-  constructor(
-    @inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository
-  ) {}
+  constructor(@inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository) {}
 
   async execute(id: string, dto: UpdateMenuDTO): Promise<Menu> {
     const existing = await this.menuRepository.findById(id);
@@ -91,9 +83,7 @@ export class UpdateMenuUseCase implements IUpdateMenuUseCase {
 
 @injectable()
 export class DeleteMenuUseCase implements IDeleteMenuUseCase {
-  constructor(
-    @inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository
-  ) {}
+  constructor(@inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository) {}
 
   async execute(id: string): Promise<boolean> {
     const existing = await this.menuRepository.findById(id);
@@ -110,12 +100,9 @@ export interface IMenuPublicApi {
 
 @injectable()
 export class MenuPublicApi implements IMenuPublicApi {
-  constructor(
-    @inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository
-  ) {}
+  constructor(@inject(TOKENS.MenuRepository) private menuRepository: IMenuRepository) {}
 
   async getMenuById(id: string): Promise<Menu | null> {
     return this.menuRepository.findById(id);
   }
 }
-

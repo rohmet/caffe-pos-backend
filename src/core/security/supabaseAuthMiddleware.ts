@@ -11,10 +11,16 @@ declare global {
   }
 }
 
-export async function supabaseAuthMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
+export async function supabaseAuthMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    res.status(401).json({ code: "UNAUTHORIZED", message: "Missing or invalid authorization token" });
+    res
+      .status(401)
+      .json({ code: "UNAUTHORIZED", message: "Missing or invalid authorization token" });
     return;
   }
 
@@ -22,7 +28,9 @@ export async function supabaseAuthMiddleware(req: Request, res: Response, next: 
   try {
     const { data, error } = await supabase.auth.getUser(token);
     if (error || !data.user) {
-      res.status(401).json({ code: "UNAUTHORIZED", message: error?.message || "Invalid user session" });
+      res
+        .status(401)
+        .json({ code: "UNAUTHORIZED", message: error?.message || "Invalid user session" });
       return;
     }
 

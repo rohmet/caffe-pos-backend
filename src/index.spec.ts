@@ -23,3 +23,11 @@ describe("Authentication integration checks", () => {
     expect(res.body).toHaveProperty("code", "BAD_REQUEST");
   });
 });
+
+describe("Dashboard Endpoint integration checks", () => {
+  it("should block request without token to dashboard summary with 401", async () => {
+    const res = await request(app).get("/api/dashboard/summary");
+    expect(res.status).toBe(401);
+    expect(res.body).toHaveProperty("code", "UNAUTHORIZED");
+  });
+});

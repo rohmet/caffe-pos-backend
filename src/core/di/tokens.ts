@@ -13,4 +13,6 @@ export const TOKENS = {
   CreateTransaksiUseCase: Symbol.for("CreateTransaksiUseCase"),
   GetSemuaTransaksiUseCase: Symbol.for("GetSemuaTransaksiUseCase"),
   GetDetailTransaksiUseCase: Symbol.for("GetDetailTransaksiUseCase"),
+  DashboardRepository: Symbol.for("DashboardRepository"),
+  GetDashboardSummaryUseCase: Symbol.for("GetDashboardSummaryUseCase"),
 };
