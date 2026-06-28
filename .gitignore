@@ -27,6 +27,8 @@ out/
 *.njsproj
 *.sln
 *.sw?
+.docs/
+.postman/
 
 # SQLite Database and Prisma
 *.db
