@@ -5,7 +5,9 @@ import cors from "cors";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 import "./modules/auth/infrastructure/Auth.registry.js";
+import "./modules/menu/infrastructure/Menu.registry.js";
 import { AuthController } from "./modules/auth/infrastructure/http/AuthController.js";
+import menuRoutes from "./modules/menu/infrastructure/http/MenuRoutes.js";
 import { supabaseAuthMiddleware } from "./core/security/supabaseAuthMiddleware.js";
 
 const app = express();
@@ -30,6 +32,9 @@ app.get("/health", (req: Request, res: Response) => {
 // Auth Routes
 app.post("/api/auth/login", AuthController.login);
 app.post("/api/auth/logout", AuthController.logout);
+
+// Menu Routes
+app.use("/api/menu", menuRoutes);
 
 // Protected Test Route (ponytail: verification check helper)
 app.get("/api/protected-test", supabaseAuthMiddleware, (req: Request, res: Response) => {
