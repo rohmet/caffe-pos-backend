@@ -16,7 +16,7 @@ export const CreateTransaksiSchema = z.object({
       z.object({
         menu_id: z.string().uuid("ID menu harus berupa UUID"),
         ukuran: z.enum(["S", "M", "L"], {
-          errorMap: () => ({ message: "Ukuran harus salah satu dari 'S', 'M', 'L'" }),
+          message: "Ukuran harus salah satu dari 'S', 'M', 'L'",
         }),
         jumlah: z.number().int().positive("Jumlah item minimal 1"),
       })
