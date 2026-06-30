@@ -6,7 +6,9 @@ import type { IGetDashboardSummaryUseCase } from "../../application/DashboardUse
 export class DashboardController {
   static async getSummary(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const useCase = container.resolve<IGetDashboardSummaryUseCase>(TOKENS.GetDashboardSummaryUseCase);
+      const useCase = container.resolve<IGetDashboardSummaryUseCase>(
+        TOKENS.GetDashboardSummaryUseCase
+      );
       const summary = await useCase.execute();
       res.status(200).json(summary);
     } catch (error) {
